@@ -25,19 +25,6 @@ int getSecondChildIndex(int index)
     return 2 * index + 2;
 }
 
-int getChildInex(int index,  int child)
-{
-    assert(child > 0 && child < 3);
-    return 2 * index + child;
-}
-
-void swap(int* a, int* b)
-{
-    int tmp = *b;
-    *b = *a;
-    *a = tmp;
-}
-
 void insert(int value)
 {
     int index = size++;
@@ -45,7 +32,7 @@ void insert(int value)
     while (index > 0) {
         int parentIndex = getParentIndex(index);
         if (parentIndex >= 0 && binary_heap[parentIndex] > value) {
-            swap(&binary_heap[parentIndex], &binary_heap[index]);
+            swap(binary_heap[parentIndex], binary_heap[index]);
         } else {
             return;
         }
@@ -79,7 +66,7 @@ void _delete() // delete has been used as keyword in c++
             return;
         }
         if (binary_heap[index] > binary_heap[checkIndex]) {
-            swap(&binary_heap[index], &binary_heap[checkIndex]);
+            swap(binary_heap[index], binary_heap[checkIndex]);
             index = checkIndex;
         } else {
             return;
@@ -109,11 +96,6 @@ int getTreeLevel(int n)
     }
 }
 
-int getFirstIndexOnLevel(int level)
-{
-    return 2 * level - 1;
-}
-
 void adjust_subtree(int parent)
 {
     while (parent < size) {
@@ -136,7 +118,7 @@ void adjust_subtree(int parent)
             return;
         }
         if (binary_heap[parent] > binary_heap[checkIndex]) {
-            swap(&binary_heap[parent], &binary_heap[checkIndex]);
+            swap(binary_heap[parent], binary_heap[checkIndex]);
             parent = checkIndex;
         } else {
             return;
